@@ -11,6 +11,28 @@
 
 普段編集するのは `jfic-web/` 配下のファイルです。記事を追加すると、公開環境で Jekyll がサイトを生成します。生成結果の `jfic-web/_site/` は編集しません。
 
+### Jekyllの環境について
+
+Jekyllを動かすには、RubyとBundlerが必要です。RubyはJekyllを実行するためのプログラミング言語、Bundlerはこのプロジェクトで使うRubyパッケージをまとめて管理するツールです。
+
+このプロジェクトでは、次の環境を使います。
+
+| 項目 | バージョン・役割 |
+| --- | --- |
+| Ruby | 3.4系。Jekyllを実行するために必要 |
+| Jekyll | 4.4.1。記事をHTMLへ変換する本体 |
+| Bundler | 4.0.8。Gemfileに記載されたパッケージを管理 |
+| `Gemfile` | このプロジェクトが使用するパッケージの定義 |
+| `Gemfile.lock` | 実際に使用するパッケージのバージョン固定 |
+
+Jekyllそのものの詳しい仕組みや、Rubyのインストール方法はREADMEでは扱いません。公式ドキュメントを参照してください。
+
+- [Jekyll公式ドキュメント](https://jekyllrb.com/docs/)
+- [JekyllのmacOS向けインストール手順](https://jekyllrb.com/docs/installation/macos/)
+- [Jekyllのクイックスタート](https://jekyllrb.com/docs/quickstart/)
+
+このリポジトリでは、Jekyllを個別にインストールするよりも、`jfic-web/` で `bundle install` を実行する方法を推奨します。`Gemfile` と `Gemfile.lock` に合わせて必要なパッケージがインストールされるためです。
+
 ## 公開までの流れ
 
 このサイトは、記事を `main` ブランチへ取り込むと自動的に公開されます。全体の流れは次のとおりです。
@@ -104,8 +126,11 @@ git switch -c update-記事の内容
 
 ```bash
 cd jfic-web
+gem install bundler -v 4.0.8
 bundle install
 ```
+
+`gem install bundler` は初回だけ実行します。Bundlerやパッケージを更新したい場合は、意図せずサイトの動作が変わる可能性があるため、先に管理者へ相談してください。
 
 記事を編集したら、同じ `jfic-web` ディレクトリでJekyllを起動します。
 
